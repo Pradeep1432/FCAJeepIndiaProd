@@ -2,6 +2,9 @@ package com.fca.prod.jeep.pages;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.text.Document;
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -72,15 +75,24 @@ public class loginPage extends testBase {
 		GrandCherokee.click();
 		firstName.sendKeys("peter");
 		lastName.sendKeys("parker");
+		/*
+		 * JavascriptExecutor js = (JavascriptExecutor) driver;
+		 * js.executeScript("arguments[0].value='peter.parker@test.com';", email);
+		 * driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		 * System.out.println("text entered using javascript executor");
+		 */
 		email.sendKeys("peter.parker@test.com");
 		confirmEmail.sendKeys("peter.parker@test.com");
 		city.sendKeys("New York");
 		zipCode.sendKeys("100038");
 		privacyCheckbox.click();
 		submit.click();
+		
+		System.out.println("successfully registered"); 
 
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		returnToHomepage.click();
+		System.out.println("back to homepage");
 
 		return new homePage();
 	}

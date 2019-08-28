@@ -1,7 +1,10 @@
 package com.fca.prod.jeep.pages;
 
+/*author name - pradeep patil
+*/
 import java.io.IOException;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,11 +16,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.fca.prod.base.testBase;
+import com.fca.prod.util.Utilities;
 
 public class homePage extends testBase {
 
 	// page factory Object repository
-	// this will store the element in cache, when this element is interacted this
+	// this will store the element in cache, when this element is interacted elements 
 	// will be taken from cache rather then page
 	// cacheLookup will increase speed of execution
 	// But when page gets refreshed, some of the elements will get corrupted or
@@ -29,7 +33,7 @@ public class homePage extends testBase {
 	@CacheLookup
 	WebElement LoginButton;
 
-	@FindBy(xpath = "//div[@id='image-ImageStore-66d16d47-0217-4ff2-b26a-caecb518e945-0']//img")
+	@FindBy(xpath = "(//img[@src='/content/dam/cross-regional/apac/jeep/en_crossregional/global/header/logo-jeep.png'])[1]")
 	WebElement Logo;
 
 	@FindBy(id = "testDrive")
@@ -72,7 +76,11 @@ public class homePage extends testBase {
 		Thread.sleep(5000);
 		act.contextClick(contactNumber).perform();
 		System.out.println("right clicked on the element");
-		
+		Thread.sleep(5000);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement ele = driver.findElement(By.xpath("//source[@srcset='/content/dam/cross-regional/test/jeep/footer/icons/fca-logo-small.png']"));
+		js.executeScript("arguments[0].scrollIntoView();", ele);
+		System.out.println("scrolled to the mentioned element");
 		Select select = new Select(BrouchureLink);
 	}
 

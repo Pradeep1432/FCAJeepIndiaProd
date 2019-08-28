@@ -15,6 +15,7 @@ public class Utilities extends testBase {
 
 	public static long PAGE_LOAD_TIMEOUT = 20;
 	public static long IMPLICIT_WAIT = 20;
+	private long TIMEWAITING = 50;
 
 	public static String TESTDATA_SHEET_PATH = "C:\\Users\\prapatil0\\eclipse-workspace\\FCAProdAutomation\\src\\main\\java\\com\\fca\\prod\\testData\\JeepProdTestData.xlsx";
 
@@ -45,4 +46,13 @@ public class Utilities extends testBase {
 		}
 		return data;
 	}
+
+	public long getTIMEWAITING() {
+		return TIMEWAITING;
+	}
+
+	public void setTIMEWAITING(long tIMEWAITING) {
+		TIMEWAITING = tIMEWAITING;
+	}
+
 }

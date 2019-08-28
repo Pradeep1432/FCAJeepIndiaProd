@@ -30,8 +30,9 @@ public class homePageTest extends testBase {
 	}
 
 	@Test(priority = 2)
-	public void verifyJeepLogo() {
+	public void verifyJeepLogo() throws InterruptedException {
 		homepage.JeepLogo();
+		//homepage.customActions();
 	}
 
 	@Test(priority = 3)
