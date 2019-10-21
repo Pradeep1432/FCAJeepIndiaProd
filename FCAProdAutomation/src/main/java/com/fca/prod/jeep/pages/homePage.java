@@ -1,9 +1,6 @@
 package com.fca.prod.jeep.pages;
 
-/*author name - pradeep patil
-*/
-import java.io.IOException;
-
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -12,20 +9,11 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.fca.prod.base.testBase;
-import com.fca.prod.util.Utilities;
 
 public class homePage extends testBase {
-
-	// page factory Object repository
-	// this will store the element in cache, when this element is interacted elements 
-	// will be taken from cache rather then page
-	// cacheLookup will increase speed of execution
-	// But when page gets refreshed, some of the elements will get corrupted or
-	// stale in cache
 
 	WebDriverWait wait = new WebDriverWait(driver, 30);
 
@@ -54,6 +42,15 @@ public class homePage extends testBase {
 	@FindBy(xpath = "//span[contains(text(),'BROCHURE')]")
 	WebElement BrouchureLink;
 
+	@FindBy(id = "findadealer")
+	WebElement FindADealer;
+	
+	@FindBy(id="vehicles")
+	WebElement VLP;
+	
+	@FindBy(xpath = "//div[@class='heading sdp-grid']//following-sibling::div//a")
+	WebElement vehicles;
+
 	// initialize all pages objects
 	public homePage() {
 		PageFactory.initElements(driver, this);
@@ -68,7 +65,7 @@ public class homePage extends testBase {
 	public boolean verifyContactNumber() {
 		return contactNumber.isDisplayed();
 	}
-	
+
 	public void customActions() throws InterruptedException {
 		Actions act = new Actions(driver);
 		act.doubleClick().build().perform();
@@ -78,19 +75,25 @@ public class homePage extends testBase {
 		System.out.println("right clicked on the element");
 		Thread.sleep(5000);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebElement ele = driver.findElement(By.xpath("//source[@srcset='/content/dam/cross-regional/test/jeep/footer/icons/fca-logo-small.png']"));
+		WebElement ele = driver.findElement(
+				By.xpath("//source[@srcset='/content/dam/cross-regional/test/jeep/footer/icons/fca-logo-small.png']"));
 		js.executeScript("arguments[0].scrollIntoView();", ele);
 		System.out.println("scrolled to the mentioned element");
-		Select select = new Select(BrouchureLink);
 	}
 
 	public boolean JeepLogo() {
-		return Logo.isDisplayed();		
+		return Logo.isDisplayed();
 	}
 
 	public loginPage singInLink() {
 		LoginButton.click();
 		return new loginPage();
+	}
+
+	public void getText() {
+		String linktext = TestDrive.getText();
+		System.out.println(linktext);
+		System.out.println("attribut text is " + FindADealer.getAttribute("href"));
 	}
 
 	public brochurePage brochureLink() {
@@ -103,4 +106,22 @@ public class homePage extends testBase {
 		return new brochurePage();
 	}
 
+	public testDrivePage testDrivePage() {
+		TestDrive.click();
+		return new testDrivePage();
+	}
+
+	public void NoOfLinks() {
+		List<WebElement> listOfLinks = driver.findElements(By.tagName("a"));
+		System.out.println("Number of links present on homepage are " + listOfLinks.size());
+		for (int i = 0; i < listOfLinks.size(); i++) {
+			System.out.println(listOfLinks.get(i).getText());
+		}
+	}
+	
+	public void vehicleLineUpTest() {
+		VLP.click();
+		
+	}
+	
 }

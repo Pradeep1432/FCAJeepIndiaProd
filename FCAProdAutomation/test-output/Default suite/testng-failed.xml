@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.fca.prod.jeep.testCases.homePageTest">
+      <class name="com.fca.prod.jeep.testCases.brochurePageTest">
         <methods>
-          <include name="customActionsTest"/>
-          <include name="setup"/>
-          <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="teardown"/>
+          <include name="verifyBrochureDetails"/>
         </methods>
-      </class> <!-- com.fca.prod.jeep.testCases.homePageTest -->
+      </class> <!-- com.fca.prod.jeep.testCases.brochurePageTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

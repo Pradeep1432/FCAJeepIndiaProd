@@ -76,10 +76,7 @@ public class brochurePage extends testBase{
 		mobileNo.sendKeys(no);
 		zipcode.sendKeys(zpcode);
 		privacyCheckbox.click();
-		submit.click();
-		System.out.println("form submitted successfully");
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);		
 	}	
 	
 	public homePage returnToHomePage() {

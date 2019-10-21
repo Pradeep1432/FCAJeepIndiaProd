@@ -11,28 +11,28 @@ import com.fca.prod.jeep.pages.loginPage;
 public class loginPageTest extends testBase {
 	homePage homepage;
 	loginPage loginpage;
-	
+
 	public loginPageTest() {
 		super();
 	}
-	
+
 	@BeforeMethod
 	public void setup() {
 		initialization();
 		homepage = new homePage();
 		loginpage = homepage.singInLink();
 	}
-	
-	@Test
+
+	@Test(enabled = false)
 	public void verifyTitle() {
 		loginpage.verifyLoginPageTitle();
 	}
-	
+
 	@Test
-	public void registerNewUser() {
+	public void registerNewUser() throws InterruptedException {
 		homepage = loginpage.register();
 	}
-	
+
 	@AfterMethod
 	public void tearDown() {
 		driver.quit();

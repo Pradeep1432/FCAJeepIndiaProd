@@ -38,10 +38,10 @@ public class brochurePageTest extends testBase {
 		return data;
 	}
 	
-	@Test(priority = 1)
-	public void verifyBrochureTitle() {
-		brochure.brochureTitle();
-	}
+	/*
+	 * @Test(priority = 1) public void verifyBrochureTitle() {
+	 * brochure.brochureTitle(); }
+	 */
 	
 	@Test(priority = 2, dataProvider="getJeepTestData")
 	public void verifyBrochureDetails(String FirstName, String LastName, String Email, String MobileNo, String ZipCode) {

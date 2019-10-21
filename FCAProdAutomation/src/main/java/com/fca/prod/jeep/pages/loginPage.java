@@ -6,11 +6,12 @@ import javax.swing.text.Document;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import com.fca.prod.base.testBase;
-
 
 public class loginPage extends testBase {
 
@@ -53,6 +54,9 @@ public class loginPage extends testBase {
 	@FindBy(id = "privacy_checkbox")
 	WebElement privacyCheckbox;
 
+	@FindBy(xpath = "//select[@placeholder='-- Select a Response --']")
+	WebElement planCarOptions;
+
 	@FindBy(xpath = "//input[@type='submit']")
 	WebElement submit;
 
@@ -71,24 +75,28 @@ public class loginPage extends testBase {
 		return LoginInHeader.isDisplayed();
 	}
 
-	public homePage register() {
+	public homePage register() throws InterruptedException {
 		GrandCherokee.click();
 		firstName.sendKeys("peter");
 		lastName.sendKeys("parker");
-		/*
-		 * JavascriptExecutor js = (JavascriptExecutor) driver;
-		 * js.executeScript("arguments[0].value='peter.parker@test.com';", email);
-		 * driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		 * System.out.println("text entered using javascript executor");
-		 */
 		email.sendKeys("peter.parker@test.com");
 		confirmEmail.sendKeys("peter.parker@test.com");
 		city.sendKeys("New York");
 		zipCode.sendKeys("100038");
+		/*
+		 * Actions act = new Actions(driver);
+		 * act.moveToElement(planCarOptions).build().perform(); planCarOptions.click();
+		 */
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", planCarOptions);
+		Thread.sleep(5000);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		Select select = new Select(planCarOptions);
+		select.selectByIndex(2);
 		privacyCheckbox.click();
 		submit.click();
-		
-		System.out.println("successfully registered"); 
+
+		System.out.println("successfully registered");
 
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		returnToHomepage.click();
